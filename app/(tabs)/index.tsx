@@ -45,7 +45,7 @@ export default function HealthGrade() {
                   <Text>건강등급</Text>
                   <SymbolView name="questionmark.circle.fill" tintColor={"gray"} size={20}></SymbolView>
                 </View>
-                <Text className='text-5xl font-bold'>4</Text>
+                <Text className='text-5xl font-bold'>{grade}</Text>
                 <Text className='text-gray-500 font-semibold'>2025.02.13 기준</Text>
               </View>
 
