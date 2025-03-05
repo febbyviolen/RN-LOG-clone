@@ -10,7 +10,7 @@ export default function HealthGrade() {
 
   const chips = ['암', '뇌혈관질환', '심장질환'];
   const [selectedChip, setSelectedChip] = useState<string>('암');
-  const [grade, setGrade] = useState(1);
+  const [grade, setGrade] = useState(4);
 
   return (
     <SafeAreaProvider>
@@ -59,7 +59,19 @@ export default function HealthGrade() {
 
             </View>
 
+            <View className='relative bg-transparent w-full justify-center'>
             <GradientLine />
+              <View className='relative w-full flex-row bg-transparent'>
+                {[...Array(9)].map((_, index) => (
+                  <View key={index} className='flex-1 bg-transparent'>
+                    {grade === index + 1 && (
+                      <View className='rounded-full w-5 h-5 bg-white border-blue-600 border-4'/>
+                    )}
+                  </View>
+                ))}
+              </View>
+            </View>
+
             <View className='flex-row w-full mb-5 mt-2 justify-between'>
               <Text className='text-gray-500'>1등급</Text>
               <Text className='text-gray-500'>9등급</Text>
