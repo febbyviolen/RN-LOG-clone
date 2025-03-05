@@ -4,11 +4,13 @@ import 'global.css';
 import { SymbolView } from 'expo-symbols';
 import Chip from 'components/chip/Chip';
 import { useState } from 'react';
+import GradientLine from 'components/line/LinearGradientsLine';
 
 export default function HealthGrade() {
 
   const chips = ['암', '뇌혈관질환', '심장질환'];
   const [selectedChip, setSelectedChip] = useState<string>('암');
+  const [grade, setGrade] = useState(1);
 
   return (
     <SafeAreaProvider>
@@ -17,7 +19,7 @@ export default function HealthGrade() {
           <Text className='text-5xl mx-5 my-5 mb-10 font-bold'>건강등급</Text>
 
           <View>
-
+           
           </View>
 
           <View className='rounded-2xl bg-white mx-5 mb-5 p-5 flex-row justify-between items-center'>
@@ -36,7 +38,7 @@ export default function HealthGrade() {
           <View className='rounded-2xl bg-white flex-col p-5 mx-5 mb-5 items-center justify-center'>
             <Text className='mb-5 px-10 text-2xl font-bold text-center'>ㅇㅇ님 나는야 건강 모범생📝</Text>
           
-            <View className='flex-row justify-between items-end mb-5'>
+            <View className='flex-row justify-between items-end mb-8'>
 
               <View className='flex-col items-center gap-3 flex-1'>
                 <View className='flex-row items-center'>
@@ -55,6 +57,12 @@ export default function HealthGrade() {
                 <Text className='text-gray-500 font-semibold'>상위 1.1%</Text>
               </View>
 
+            </View>
+
+            <GradientLine />
+            <View className='flex-row w-full mb-5 mt-2 justify-between'>
+              <Text className='text-gray-500'>1등급</Text>
+              <Text className='text-gray-500'>9등급</Text>
             </View>
 
             <TouchableOpacity className='bg-gray-800 w-full items-center rounded-lg py-3'>
