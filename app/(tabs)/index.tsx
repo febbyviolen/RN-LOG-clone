@@ -2,8 +2,14 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import 'global.css';
 import { SymbolView } from 'expo-symbols';
+import Chip from 'components/chip/Chip';
+import { useState } from 'react';
 
 export default function HealthGrade() {
+
+  const chips = ['암', '뇌혈관질환', '심장질환'];
+  const [selectedChip, setSelectedChip] = useState<string>('암');
+
   return (
     <SafeAreaProvider>
       <SafeAreaView className='bg-gray-100'>
@@ -57,11 +63,11 @@ export default function HealthGrade() {
           </View>
 
           {/*  */}
-          <View className='rounded-2xl bg-white flex-col mx-5 px-5 py-5'>
+          <View className='rounded-2xl bg-white flex-col mx-5 mb-5 px-5 py-5'>
             <Text className='mb-5 text-2xl font-bold'>건강검진 결과</Text>
 
             {/* card */}
-            <View className='flex-row justify-center bg-red-50 gap-4 py-5 mb-10 px-8 rounded-lg'>
+            <View className='flex-row justify-center bg-red-50 gap-4 py-5 mb-10 px-8 rounded-2xl'>
               <SymbolView name='exclamationmark.circle.fill' tintColor={"red"} />
               <View className='flex-col gap-2'>
                 <Text className='font-semibold text-xl text-red-500'>2년 이내 건강검진 결과가 없으시네요?</Text>
@@ -98,24 +104,48 @@ export default function HealthGrade() {
 
             <TouchableOpacity className='bg-gray-800 w-full items-center rounded-lg 
               py-3 '>
-                <Text className='text-white text-lg font-bold'>분석 결과 더보기</Text>
-              </TouchableOpacity>
+              <Text className='text-white text-lg font-bold'>분석 결과 더보기</Text>
+            </TouchableOpacity>
           </View>
 
           {/*  */}
-          <View className='flex-row mx-5 justify-between gap-5'>
-            <View className='flex-col bg-blue-500 flex-1 rounded-lg p-5 gap-2'>
+          <View className='flex-row mx-5 mb-5 justify-between gap-5'>
+            <View className='flex-col bg-blue-500 justify-between flex-1 rounded-2xl p-5 gap-2'>
               <Text className='text-2xl font-bold text-white'>건강등급 산출 & {'\n'}검진결과 등록</Text>
               <Text className='text-white'>등급 업데이트 하기</Text>
-              <SymbolView name="powermeter" size={45} tintColor={"white"} className='self-end'/>
+              <View className='self-end'>
+                <SymbolView name="powermeter" size={45} tintColor={"white"} />
+              </View>
             </View>
 
-            <View className='flex-col bg-white flex-1'>
-              <Text>의료 이용 기록</Text>
-              <Text>병원/약국 기록 살펴보기</Text>
-              
+            <View className='flex-col bg-white justify-between flex-1 rounded-2xl p-5 gap-2'>
+              <Text className='text-2xl font-bold text-gray950'>의료 이용 기록 </Text>
+              <Text className='text-gray950'>병원/약국 기록 {'\n'}살펴보기</Text>
+              <View className='self-end'>
+                <SymbolView name="cross.case.fill" size={50} tintColor={"green"} />
+              </View>
             </View>
 
+          </View>
+
+          {/*  */}
+          <View className='flex-col bg-white mx-5 p-5 rounded-xl'>
+            <Text className='text-2xl font-bold mb-5'>나의 3대 질병 위험도</Text>
+
+            <View className='flex-row gap-3'>
+              {chips.map((chip) => (
+                <Chip key={chips.indexOf(chip)} label={chip} isSelected={selectedChip == chip} onPress={() => setSelectedChip(chip)} />
+              ))
+              }
+            </View>
+
+            <View className='mb-10'>
+
+            </View>
+
+            <Text className='text-center px-5'>ㅇㅇ님은 또래 대비
+              <Text className='text-green-600 font-bold'> 31% 안전</Text>해요.
+            </Text>
           </View>
 
 
