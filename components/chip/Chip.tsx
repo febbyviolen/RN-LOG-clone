@@ -1,20 +1,17 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text } from 'react-native'
 import React from 'react'
-
 interface ChipProps { 
     label: string;
-    isSelected: boolean;
-    onPress: () => void;
+    labelColor: string;
+    bgColor: string;
 }
 
-const Chip: React.FC<ChipProps> = ({ label, isSelected, onPress }) => {
-    return (
-        <TouchableOpacity onPress={onPress}>
-            <Text className={`p-2 px-3 rounded-2xl font-bold border ${isSelected ? 'bg-gray-700 text-white border-gray-700' : 'bg-white text-gray-400 border-gray-400'}`}>
-                {label}
-            </Text>
-        </TouchableOpacity>
-    )
+const Chip: React.FC<ChipProps>= ({label, labelColor, bgColor}) => {
+  return (
+    <View>
+      <Text className={`rounded-lg ${bgColor} ${labelColor} py-1 px-2`}>{label}</Text>
+    </View>
+  )
 }
 
 export default Chip

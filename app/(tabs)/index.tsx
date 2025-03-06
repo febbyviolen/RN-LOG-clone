@@ -2,9 +2,11 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import 'global.css';
 import { SymbolView } from 'expo-symbols';
-import Chip from 'components/chip/Chip';
+import ClickableChip from 'components/chip/ClickableChip';
 import { useState } from 'react';
 import GradientLine from 'components/line/LinearGradientsLine';
+import Chip from 'components/chip/Chip';
+import { LineChart } from 'react-native-gifted-charts';
 
 export default function HealthGrade() {
 
@@ -22,6 +24,7 @@ export default function HealthGrade() {
            
           </View>
 
+          {/* first card */}
           <View className='rounded-2xl bg-white mx-5 mb-5 p-5 flex-row justify-between items-center'>
             <View className='flex-row items-center'>
               <SymbolView name="powermeter" size={35} />
@@ -34,7 +37,7 @@ export default function HealthGrade() {
             <SymbolView name="chevron.right" tintColor={'gray'} size={20} />
           </View>
 
-          {/*  */}
+          {/* my grade */}
           <View className='rounded-2xl bg-white flex-col p-5 mx-5 mb-5 items-center justify-center'>
             <Text className='mb-5 px-10 text-2xl font-bold text-center'>ㅇㅇ님 나는야 건강 모범생📝</Text>
           
@@ -59,6 +62,7 @@ export default function HealthGrade() {
 
             </View>
 
+            {/* rainbow line */}
             <View className='relative bg-transparent w-full justify-center'>
             <GradientLine />
               <View className='relative w-full flex-row bg-transparent'>
@@ -82,7 +86,7 @@ export default function HealthGrade() {
             </TouchableOpacity>
           </View>
 
-          {/*  */}
+          {/* health check result */}
           <View className='rounded-2xl bg-white flex-col mx-5 mb-5 px-5 py-5'>
             <Text className='mb-5 text-2xl font-bold'>건강검진 결과</Text>
 
@@ -114,9 +118,40 @@ export default function HealthGrade() {
 
               <View className='flex-col gap-3'>
                 <Text className='font-bold'>총콜레스테롤</Text>
-                <View className='flex-row justify-between'>
-                  <Text className='text-3xl font-bold'>--</Text>
-                  <Text className='text-2xl text-gray-300 font-bold'>검진결과 없음</Text>
+                <View className='flex-row justify-between items-center'>
+                  <View className='flex-col gap-1'>
+                    <Text className='text-3xl font-bold'>203</Text>
+                      <View className='self-start'>
+                        <Chip label={"주의"} bgColor={"bg-red-400"} labelColor='text-white'></Chip>
+                      </View>
+                    </View>
+                    {/* graph */}
+                    <View className='pt-5'>
+                      <LineChart 
+                        areaChart
+                        data={[ 
+                          {value:189, dataPointText: '189'}, 
+                          {value:208, dataPointText: '208'}, 
+                          {value:203, dataPointText: '203'} ]}
+                        startFillColor="lightblue"
+                        startOpacity={0.8}
+                        endFillColor="white"
+                        endOpacity={0.3}
+                        hideRules
+                        height={30}
+                        width={120}
+                        hideYAxisText
+                        disableScroll
+                        hideAxesAndRules
+                        showVerticalLines
+                        color1='blue'
+                        dataPointsColor1="blue"
+                        overflowTop={20}
+                        textColor1="black"
+                        textShiftY={-5}
+                        textShiftX={-5}
+                      />
+                    </View>
                 </View>
               </View>
 
@@ -154,7 +189,7 @@ export default function HealthGrade() {
 
             <View className='flex-row gap-3'>
               {chips.map((chip) => (
-                <Chip key={chips.indexOf(chip)} label={chip} isSelected={selectedChip == chip} onPress={() => setSelectedChip(chip)} />
+                <ClickableChip key={chips.indexOf(chip)} label={chip} isSelected={selectedChip == chip} onPress={() => setSelectedChip(chip)} />
               ))
               }
             </View>
